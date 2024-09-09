@@ -3,6 +3,11 @@ import json
 import msprime
 import pyslim
 
+# class MockSnakemake:
+#     input = {"params_file": "output/simulations/deha/1_simulation-params.json"}
+
+# snakemake = MockSnakemake()
+
 with open(snakemake.input["params_file"], "r") as f:
     params = json.load(f)
 

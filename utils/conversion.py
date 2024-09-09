@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import numpy as np
+import tskit
 
 
 def vcftools_to_ms(input_file, output_file, pos_file=None):
@@ -60,3 +61,10 @@ def treeseq_to_ms(trees, ms_file, normalize_positions=True, header_line="", seed
     haplotypes_block = "\n".join(hap for hap in trees.haplotypes())
     with open(ms_file, "w") as f:
         f.write("\n".join([header, segsites_line, positions_line, haplotypes_block]))
+
+
+
+def treeseq_to_vcf(trees, vcf_file):
+    # Write out to a VCF file
+    with open(vcf_file, "w") as file:
+        trees.write_vcf(file)

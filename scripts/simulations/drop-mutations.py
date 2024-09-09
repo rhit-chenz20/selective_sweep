@@ -5,7 +5,7 @@ import msprime
 import pyslim
 
 sys.path.append(snakemake.scriptdir + "/../..")
-from utils.conversion import treeseq_to_ms
+from utils.conversion import treeseq_to_ms, treeseq_to_vcf
 
 
 def sample_genomes(ts, num_genomes):
@@ -107,11 +107,11 @@ def msprime_metrics_postmutation(ts):
 
 with open(snakemake.input["params_file"], "r") as f:
     params = json.load(f)
-trees = pyslim.load(snakemake.input["slim_output"])
+all_trees = pyslim.load(snakemake.input["slim_output"])
 
 # Sample, get statistics, and drop mutations
 
-trees = sample_genomes(trees, int(params["sample-size"]))
+trees = sample_genomes(all_trees, int(params["sample-size"]))
 msprime_metrics = dict()
 msprime_metrics.update(msprime_metrics_premutation(trees, params["regime"]))
 trees = clear_msprime_mutations(trees)
@@ -132,4 +132,9 @@ treeseq_to_ms(
     normalize_positions=False,
     header_line=f"SLiM with TreeSeq, simulation ID {snakemake.wildcards['sim_id']}",
     seed=params["seed"],
+)
+
+treeseq_to_vcf(
+    all_trees,
+    vcf_file=snakemake.output["vcf_file"],
 )

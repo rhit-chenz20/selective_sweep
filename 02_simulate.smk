@@ -85,7 +85,7 @@ rule logtar_npy:
         tar_file = OUTDIR/"logdata.tar"
     params:
         npy_folder = OUTDIR/"npy-log-scale",
-    conda: "envs/simulate.yaml"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/tar_npy.py"
 
 
@@ -97,7 +97,7 @@ rule tar_npy:
         tar_file = OUTDIR/"data.tar"
     params:
         npy_folder = OUTDIR/"npy",
-    conda: "envs/simulate.yaml"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/tar_npy.py"
 
 
@@ -130,7 +130,7 @@ rule aggregate_parameters:
     params:
         benchmarks_folder = "benchmarks/" + str(OUTDIR_ID),
         simulations_folder = OUTDIR
-    conda: "envs/simulate.yaml"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/aggregate-parameters.py"
 
 
@@ -144,7 +144,7 @@ rule calculate_normalize_features:
         npy_log = OUTDIR/"npy-log-scale/{sim_id}.npy",
         features = OUTDIR/"features/{sim_id}_features.tsv",
         stats = OUTDIR/"features/{sim_id}_feature-stats.tsv"
-    conda: 'envs/simulate.yaml'
+    # conda: 'envs/simulate.yaml'
     script: "scripts/simulations/features-and-normalization.py"
 
 
@@ -155,8 +155,9 @@ rule drop_mutations:
     output:
         trees_file = OUTDIR/"{sim_id}_mutation-dropped.trees",
         metrics_file = OUTDIR/"{sim_id}_msprime-metrics.txt",
-        ms_file = OUTDIR/"{sim_id}_genotypes.ms"
-    conda: "envs/simulate.yaml"
+        ms_file = OUTDIR/"{sim_id}_genotypes.ms",
+        vcf_file = OUTDIR/"{sim_id}_genetic_variants.vcf"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/drop-mutations.py"
 
 
@@ -191,7 +192,7 @@ rule slim_script:
         slim_script = OUTDIR/"{sim_id}_script.slim"
     params:
         outdir = OUTDIR
-    conda: "envs/simulate.yaml"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/make-slim-script.py"
 
 
@@ -200,12 +201,12 @@ rule burnin:
         params_file = OUTDIR/"{sim_id}_simulation-params.json"
     output:
         trees = OUTDIR/"{sim_id}_burnin.trees"
-    conda: "envs/simulate.yaml"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/simulation-burnin.py"
 
 
 rule instantiate_parameters:
     output:
         params_file = OUTDIR/"{sim_id}_simulation-params.json"
-    conda: "envs/simulate.yaml"
+    # conda: "envs/simulate.yaml"
     script: "scripts/simulations/instantiate-simulation-parameters.py"
