@@ -64,7 +64,7 @@ def treeseq_to_ms(trees, ms_file, normalize_positions=True, header_line="", seed
 
 
 
-def treeseq_to_vcf(trees, vcf_file):
-    # Write out to a VCF file
-    with open(vcf_file, "w") as file:
-        trees.write_vcf(file)
+# def treeseq_to_vcf(trees, vcf_file):
+#     # Write out to a VCF file
+#     with open(vcf_file, "w") as file:
+#         trees.write_vcf(file)

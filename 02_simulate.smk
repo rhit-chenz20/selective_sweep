@@ -156,7 +156,7 @@ rule drop_mutations:
         trees_file = OUTDIR/"{sim_id}_mutation-dropped.trees",
         metrics_file = OUTDIR/"{sim_id}_msprime-metrics.txt",
         ms_file = OUTDIR/"{sim_id}_genotypes.ms",
-        vcf_file = OUTDIR/"{sim_id}_genetic_variants.vcf"
+        # ms_all_file = OUTDIR/"{sim_id}_all_genotypes.ms"
     # conda: "envs/simulate.yaml"
     script: "scripts/simulations/drop-mutations.py"
 

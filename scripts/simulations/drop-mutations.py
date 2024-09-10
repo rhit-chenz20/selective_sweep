@@ -134,7 +134,7 @@ treeseq_to_ms(
     seed=params["seed"],
 )
 
-treeseq_to_vcf(
-    all_trees,
-    vcf_file=snakemake.output["vcf_file"],
-)
+# treeseq_to_vcf(
+#     all_trees,
+#     vcf_file=snakemake.output["vcf_file"],
+# )

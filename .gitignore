@@ -8,12 +8,15 @@ output
 raw-data
 raw-simulations
 fig-manual
+relate/relate_v1.2.2_MacOSX_M
 
 test.sh
 
 # Data files
 *.pdf
 *.tsv
+*.haps
+*.sample
 
 # Various intermediate files
 .DS_Store
